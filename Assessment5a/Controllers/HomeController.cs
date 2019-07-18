@@ -15,7 +15,29 @@ namespace Assessment5a.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Login(Account account)
+        {
+            if (ModelState.IsValid && account.password == "open sesame")
+            {
+                return View("Welcome", account);
+            }
+            return View("WrongPassword");
+        }
+
+
+        public IActionResult Welcome(Account account)
+        {
+            ViewBag.Name = account.name.ToUpper();
+            ViewBag.Length = account.name.Length;
+            return View(account);
+        }
+
+        public IActionResult WrongPassword()
         {
             return View();
         }
